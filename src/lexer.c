@@ -168,8 +168,52 @@ Token lexerNextToken(Lexer *lx)
     if (lx->current == '"')
         return lexerString(lx);
 
-    char unknown[2] = { (char)lx->current, '\0' };
     int col = lx->column;
+
+    if (lx->current == '=' && lx->next == '=') {
+        lexerAdvance(lx);
+        lexerAdvance(lx);
+        return makeToken(lx, TOK_EQUAL, NULL, col);
+    }
+    if (lx->current == '!' && lx->next == '=') {
+        lexerAdvance(lx);
+        lexerAdvance(lx);
+        return makeToken(lx, TOK_NOT_EQUAL, NULL, col);
+    }
+    if (lx->current == '<' && lx->next == '=') {
+        lexerAdvance(lx);
+        lexerAdvance(lx);
+        return makeToken(lx, TOK_LE, NULL, col);
+    }
+    if (lx->current == '>' && lx->next == '=') {
+        lexerAdvance(lx);
+        lexerAdvance(lx);
+        return makeToken(lx, TOK_GE, NULL, col);
+    }
+
+    switch (lx->current)
+    {
+        case '=': lexerAdvance(lx); return makeToken(lx, TOK_ASSIGN, NULL, col);
+        case '<': lexerAdvance(lx); return makeToken(lx, TOK_LT, NULL, col);
+        case '>': lexerAdvance(lx); return makeToken(lx, TOK_GT, NULL, col);
+        case '+': lexerAdvance(lx); return makeToken(lx, TOK_PLUS, NULL, col);
+        case '-': lexerAdvance(lx); return makeToken(lx, TOK_MINUS, NULL, col);
+        case '*': lexerAdvance(lx); return makeToken(lx, TOK_STAR, NULL, col);
+        case '/': lexerAdvance(lx); return makeToken(lx, TOK_SLASH, NULL, col);
+        case '%': lexerAdvance(lx); return makeToken(lx, TOK_PERCENT, NULL, col);
+        case '(': lexerAdvance(lx); return makeToken(lx, TOK_LPAREN, NULL, col);
+        case ')': lexerAdvance(lx); return makeToken(lx, TOK_RPAREN, NULL, col);
+        case '{': lexerAdvance(lx); return makeToken(lx, TOK_LBRACE, NULL, col);
+        case '}': lexerAdvance(lx); return makeToken(lx, TOK_RBRACE, NULL, col);
+        case '[': lexerAdvance(lx); return makeToken(lx, TOK_LBRACKET, NULL, col);
+        case ']': lexerAdvance(lx); return makeToken(lx, TOK_RBRACKET, NULL, col);
+        case ',': lexerAdvance(lx); return makeToken(lx, TOK_COMMA, NULL, col);
+        case '.': lexerAdvance(lx); return makeToken(lx, TOK_DOT, NULL, col);
+        case ':': lexerAdvance(lx); return makeToken(lx, TOK_COLON, NULL, col);
+        case ';': lexerAdvance(lx); return makeToken(lx, TOK_SEMICOLON, NULL, col);
+    }
+
+    char unknown[2] = { (char)lx->current, '\0'};
     lexerAdvance(lx);
     return makeToken(lx, TOK_UNKNOWN, unknown, col);
 }

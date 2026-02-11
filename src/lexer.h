@@ -212,6 +212,32 @@ typedef enum {
     TOK_RANGE,
     TOK_STEP,
 
+    /* Operators */
+    TOK_ASSIGN,
+    TOK_EQUAL,
+    TOK_NOT_EQUAL,
+    TOK_LT,
+    TOK_GT,
+    TOK_LE,
+    TOK_GE,
+    TOK_PLUS,
+    TOK_MINUS,
+    TOK_STAR,
+    TOK_SLASH,
+    TOK_PERCENT,
+
+    /* Delimiters */
+    TOK_LPAREN,
+    TOK_RPAREN,
+    TOK_LBRACE,
+    TOK_RBRACE,
+    TOK_LBRACKET,
+    TOK_RBRACKET,
+    TOK_COMMA,
+    TOK_DOT,
+    TOK_COLON,
+    TOK_SEMICOLON,
+
     /* Special */
     TOK_IDENTIFIER,
     TOK_NUMBER,
