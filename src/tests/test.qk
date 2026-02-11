@@ -1,0 +1,5 @@
+new device = USBIN
+send(device, "hello")
+If true then
+    send(USBOUT, "world")
+end
