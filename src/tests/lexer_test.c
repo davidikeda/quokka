@@ -12,6 +12,7 @@ static const char *tokenName(TokenType t)
     {
         case TOK_EOF: return "EOF";
         case TOK_IDENTIFIER: return "IDENTIFIER";
+        case TOK_ELSE: return "ELSE";
         case TOK_NUMBER: return "NUMBER";
         case TOK_STRING: return "STRING";
 
@@ -20,6 +21,12 @@ static const char *tokenName(TokenType t)
         case TOK_SEND: return "SEND";
         case TOK_USBIN: return "USBIN";
         case TOK_USBOUT: return "USBOUT";
+        case TOK_AS: return "AS";
+        case TOK_STATUS: return "STATUS";
+        case TOK_CONNECT: return "CONNECT";
+        case TOK_THEN: return "THEN";
+        case TOK_WRITE: return "WRITE";
+        case TOK_LOG: return "LOG";
 
         case TOK_ASSIGN: return "ASSIGN";
         case TOK_EQUAL: return "EQUAL";

@@ -63,6 +63,15 @@ static const Keyword keywords[] = {
     { "and", TOK_AND },
     { "or", TOK_OR },
     { "not", TOK_NOT },
+    {"as", TOK_AS},
+    {"connect", TOK_CONNECT},
+    {"status", TOK_STATUS},
+    {"write", TOK_WRITE},
+    {"log", TOK_LOG},
+    {"funct", TOK_FUNCT},
+    {"try", TOK_TRY},
+    {"except", TOK_EXCEPT},
+    {"finally", TOK_FINALLY},
     { NULL, TOK_UNKNOWN }
 };
 

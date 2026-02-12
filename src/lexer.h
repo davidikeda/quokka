@@ -242,6 +242,7 @@ typedef enum {
     TOK_IDENTIFIER,
     TOK_NUMBER,
     TOK_STRING,
+    TOK_SYMBOL,
     TOK_EOF,
     TOK_UNKNOWN
 

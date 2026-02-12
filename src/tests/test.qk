@@ -1,5 +1,9 @@
-new device = USBIN
-send(device, "hello")
-If true then
-    send(USBOUT, "world")
-end
+new device USB1 as Keyboard;
+USB1.connect();
+
+if (USB1.status() == "connected") then {
+    USB1.write(header="KEY-UP", payload="A");
+    USB1.write(header="KEY-DOWN", payload="A");
+} else {
+    log("Keyboard not detected, aborting.");
+};
