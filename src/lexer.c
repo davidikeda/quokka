@@ -3,7 +3,7 @@
 //
 
 #include "lexer.h"
-
+#include "compat.h"
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
