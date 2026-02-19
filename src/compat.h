@@ -5,7 +5,7 @@
 #ifndef COMPAT_H
 #define COMPAT_H
 
-#ifdef TARGET_OS_WIN32
+#ifdef _WIN32
     #include <string.h>
     #define strcasecmp _stricmp
 #else
