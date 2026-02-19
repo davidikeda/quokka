@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
     lexerFree(lexer);
     fclose(file);
 
-    if (result->error_count > 0 || parser->error_count > 0)
+    if (result->error_count > 0)
     {
         return 1;
     }
