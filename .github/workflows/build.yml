@@ -34,17 +34,17 @@ jobs:
         working-directory: build
         run: ls -la
 
-      - name: Check test file exists
-        run: ls -la ${{ github.workspace }}/src/tests/
-
       - name: Run lexer test
-        run: ${{ github.workspace }}/build/lexer_test ${{ github.workspace }}/src/tests/sample.qk
+        working-directory: build
+        run: ./lexer_test ../src/tests/sample.qk
 
       - name: Run parser test
-        run: ${{ github.workspace }}/build/parser_test ${{ github.workspace }}/src/tests/sample.qk
+        working-directory: build
+        run: ./parser_test ../src/tests/sample.qk
 
       - name: Run main executable
-        run: ${{ github.workspace }}/build/quokka ${{ github.workspace }}/src/tests/sample.qk
+        working-directory: build
+        run: ./quokka ../src/tests/sample.qk
 
   build-macos:
     runs-on: macos-latest
@@ -71,17 +71,21 @@ jobs:
         working-directory: build
         run: ls -la
 
-      - name: Check test file exists
+      - name: Sanity Check
+        working-directory: build
         run: ls -la ${{ github.workspace }}/src/tests/
 
       - name: Run lexer test
-        run: ${{ github.workspace }}/build/lexer_test ${{ github.workspace }}/src/tests/sample.qk
+        working-directory: build
+        run: ./lexer_test ../src/tests/sample.qk
 
       - name: Run parser test
-        run: ${{ github.workspace }}/build/parser_test ${{ github.workspace }}/src/tests/sample.qk
+        working-directory: build
+        run: ./parser_test ../src/tests/sample.qk
 
       - name: Run main executable
-        run: ${{ github.workspace }}/build/quokka ${{ github.workspace }}/src/tests/sample.qk
+        working-directory: build
+        run: ./quokka ../src/tests/sample.qk
 
   build-windows:
     runs-on: windows-latest
@@ -105,14 +109,14 @@ jobs:
         working-directory: build
         run: dir
 
-      - name: Check test file exists
-        run: dir ${{ github.workspace }}\src\tests\
-
       - name: Run lexer test
-        run: ${{ github.workspace }}\build\Release\lexer_test.exe ${{ github.workspace }}\src\tests\sample.qk
+        working-directory: build
+        run: .\Release\lexer_test.exe ..\src\tests\sample.qk
 
       - name: Run parser test
-        run: ${{ github.workspace }}\build\Release\parser_test.exe ${{ github.workspace }}\src\tests\sample.qk
+        working-directory: build
+        run: .\Release\parser_test.exe ..\src\tests\sample.qk
 
       - name: Run main executable
-        run: ${{ github.workspace }}\build\Release\quokka.exe ${{ github.workspace }}\src\tests\sample.qk
+        working-directory: build
+        run: .\Release\quokka.exe ..\src\tests\sample.qk
