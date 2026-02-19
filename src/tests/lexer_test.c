@@ -27,6 +27,7 @@ static const char *tokenName(TokenType t)
         case TOK_THEN: return "THEN";
         case TOK_WRITE: return "WRITE";
         case TOK_LOG: return "LOG";
+        case TOK_IMPORT: return "IMPORT";
 
         case TOK_ASSIGN: return "ASSIGN";
         case TOK_EQUAL: return "EQUAL";
@@ -51,6 +52,7 @@ static const char *tokenName(TokenType t)
         case TOK_DOT: return "DOT";
         case TOK_COLON: return "COLON";
         case TOK_SEMICOLON: return "SEMICOLON";
+        case TOK_AT: return "AT";
 
         default: return "UNKNOWN";
     }
@@ -58,10 +60,10 @@ static const char *tokenName(TokenType t)
 
 int main(void)
 {
-    FILE *f = fopen("test.qk", "r");
+    FILE *f = fopen("/Users/1020986/Documents/Programming/quokka/src/tests/test.qk", "r");
     if (!f)
     {
-        perror("test.qk");
+        perror("/Users/1020986/Documents/Programming/quokka/src/tests/test.qk");
         return 1;
     }
 

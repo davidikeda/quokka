@@ -1,3 +1,8 @@
+@import "logging.j";
+@import "usb_driver.j";
+
+// test Comment @import "logging.j" this should do nothing
+
 new device USB1 as Keyboard;
 USB1.connect();
 

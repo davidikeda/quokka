@@ -10,17 +10,17 @@
 
 static void lexerAdvance(Lexer *lx)
 {
-    lx->current = lx->next;
-    lx->next = fgetc(lx->file);
-
     if (lx->current == '\n')
     {
         lx->line++;
         lx->column = 0;
-    } else
+    } else if (lx->current != EOF)
     {
         lx->column++;
     }
+
+    lx->current = lx->next;
+    lx->next = fgetc(lx->file);
 }
 
 static void lexerSkipWhitespace(Lexer *lx)
@@ -56,22 +56,19 @@ static const Keyword keywords[] = {
     { "if", TOK_IF },
     { "then", TOK_THEN },
     { "else", TOK_ELSE },
+    {"try", TOK_TRY},
+    {"except", TOK_EXCEPT},
+    {"finally", TOK_FINALLY},
+    { "and", TOK_AND },
+    { "or", TOK_OR },
+    { "not", TOK_NOT },
     { "send", TOK_SEND },
     { "receive", TOK_RECEIVE },
     { "usbin", TOK_USBIN },
     { "usbout", TOK_USBOUT },
-    { "and", TOK_AND },
-    { "or", TOK_OR },
-    { "not", TOK_NOT },
     {"as", TOK_AS},
-    {"connect", TOK_CONNECT},
-    {"status", TOK_STATUS},
-    {"write", TOK_WRITE},
-    {"log", TOK_LOG},
     {"funct", TOK_FUNCT},
-    {"try", TOK_TRY},
-    {"except", TOK_EXCEPT},
-    {"finally", TOK_FINALLY},
+    {"import", TOK_IMPORT},
     { NULL, TOK_UNKNOWN }
 };
 
@@ -202,6 +199,7 @@ Token lexerNextToken(Lexer *lx)
 
     switch (lx->current)
     {
+        case '@': lexerAdvance(lx); return makeToken(lx, TOK_AT, NULL, col);
         case '=': lexerAdvance(lx); return makeToken(lx, TOK_ASSIGN, NULL, col);
         case '<': lexerAdvance(lx); return makeToken(lx, TOK_LT, NULL, col);
         case '>': lexerAdvance(lx); return makeToken(lx, TOK_GT, NULL, col);

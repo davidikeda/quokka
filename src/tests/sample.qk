@@ -1,0 +1,15 @@
+@import "dttransmission.j";
+@import "logging.j";
+@import "usb_driver.j";
+
+// Comment Test
+
+new device USB1 as Mouse;
+USB1.connect();
+
+if (USB1.status() == "connected") then {
+    USB1.write(header="KEY-UP", payload="LEFT");
+    USB1.write(header="KEY-DOWN", payload="LEFT");
+} else {
+    log("MOUSE not detected, aborting.");
+};

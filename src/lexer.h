@@ -57,10 +57,8 @@ typedef enum {
     /* I/O */
     TOK_READ,
     TOK_WRITE,
-    TOK_PRINT,
     TOK_LOG,
     TOK_INPUT,
-    TOK_PROMPT,
 
     /* Scope & Storage */
     TOK_GLOBAL,
@@ -95,10 +93,7 @@ typedef enum {
     TOK_IMPORT,
     TOK_EXPORT,
     TOK_AS,
-    TOK_PYTHON,
-    TOK_JAVA,
-    TOK_KOTLIN,
-    TOK_C,
+    TOK_AT,
 
     /* File / Language Identifiers */
     TOK_JOEY,
