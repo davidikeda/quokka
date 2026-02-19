@@ -9,10 +9,10 @@
 
 int main(void)
 {
-    FILE *f = fopen("/Users/1020986/Documents/Programming/quokka/src/tests/test.qk", "r");
+    FILE *f = fopen("test.qk", "r");
     if (!f)
     {
-        perror("/Users/1020986/Documents/Programming/quokka/src/tests/test.qk");
+        perror("test.qk");
         return 1;
     }
 
