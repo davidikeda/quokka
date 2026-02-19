@@ -43,5 +43,5 @@ jobs:
       - name: Run tests
         run: |
           cd build
-          ./lexer_test ../tests/sample.qk
-          ./parser_test ../tests/sample.qk
+          ./lexer_test ../src/tests/sample.qk
+          ./parser_test ../src/tests/sample.qk

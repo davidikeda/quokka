@@ -30,8 +30,8 @@ jobs:
       - name: Run tests
         run: |
           cd build
-          ./lexer_test ../tests/sample.qk
-          ./parser_test ../tests/test.qk
+          ./lexer_test ../src/tests/sample.qk
+          ./parser_test ../src/tests/test.qk
 
       - name: Build main executable
-        run: cd build && ./quokka ../tests/test.qk
+        run: cd build && ./quokka ../src/tests/test.qk
