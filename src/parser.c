@@ -201,17 +201,18 @@ static ASTNode* parser_parse_arguments(Parser *p)
             // Handle named arguments: name="value"
             if (p->peek.type == TOK_ASSIGN && parser_check(p, TOK_IDENTIFIER))
             {
-                Token name = p->current;
+                char *name_value = p->current.value ? strdup(p->current.value) : strdup("");  // Copy FIRST
+                int name_line = p->current.line;
+                int name_col = p->current.column;
+
                 parser_advance(p);
                 parser_consume(p, TOK_ASSIGN, "Expected '='");
                 ASTNode *value = parser_parse_primary(p);
 
-                ASTNode *arg = ast_create(AST_BINARY_OP, name.line, name.column);
+                ASTNode *arg = ast_create(AST_BINARY_OP, name_line, name_col);
                 arg->op = strdup("=");
-                arg->left = ast_create_identifier(name.value ? name.value : "", name.line, name.column);
-                arg->right = value;
-
-                ast_add_child(args, arg);
+                arg->left = ast_create_identifier(name_value, name_line, name_col);  // Use copied value
+                free(name_value);
             } else
             {
                 ASTNode *expr = parser_parse_expression(p);
@@ -362,7 +363,9 @@ static ASTNode* parser_parse_primary(Parser *p)
     {
         char *value = p->current.value ? strdup(p->current.value) : strdup("");
         parser_advance(p);
-        return ast_create_string(value, line, col);
+        ASTNode *str_node = ast_create_string(value, line, col);
+        free(value);
+        return str_node;
     }
 
     if (parser_check(p, TOK_IDENTIFIER))
@@ -372,7 +375,6 @@ static ASTNode* parser_parse_primary(Parser *p)
         ASTNode *ident = ast_create_identifier(ident_value, line, col);
         free(ident_value);
 
-        // Check for standalone function call: func(...)
         if (parser_check(p, TOK_LPAREN))
         {
             parser_consume(p, TOK_LPAREN, "Expected '('");
@@ -381,8 +383,6 @@ static ASTNode* parser_parse_primary(Parser *p)
             ASTNode *call = ast_create_call(ident, args, line, col);
             return call;
         }
-
-        // Check for member access/method calls: obj.method()
         return parser_parse_call_or_member(p, ident);
     }
 
@@ -404,6 +404,8 @@ ASTNode* parser_parse(Parser *p)
 
 void parser_free(Parser *p)
 {
+    if (!p) return;
+
     if (p->current.value) free(p->current.value);
     if (p->peek.value) free(p->peek.value);
     free(p);

@@ -49,6 +49,7 @@ ASTNode* ast_create_binary(ASTNode *left, const char *op, ASTNode *right, int li
     ASTNode *node = ast_create(AST_BINARY_OP, line, column);
     node->left = left;
     node->right = right;
+    node->op = op ? strdup(op) : NULL;
     return node;
 }
 

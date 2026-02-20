@@ -63,16 +63,16 @@ int main(int argc, char *argv[])
     ValidationResult *result = validator_validate(ast);
     validator_print_errors(result);
 
+    int error_count = result->error_count;
     validator_free(result);
     ast_free(ast);
     parser_free(parser);
     lexerFree(lexer);
     fclose(file);
 
-    if (result->error_count > 0)
+    if (error_count > 0)
     {
         return 1;
     }
-
     return 0;
 }
